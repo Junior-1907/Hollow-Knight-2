@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.game-board {
+    border: 3px solid #333;
+    width: 80%;
+    height: 650px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+}
+.knight {
+    width: 85px;
+    position: absolute;
+    bottom: 0;
+}
