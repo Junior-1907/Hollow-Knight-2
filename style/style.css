@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 .game-board {
     border: 3px solid #333;
@@ -22,7 +23,7 @@
     width: 120px;
     position: absolute;
     bottom: 0;
-    animation: enemymove 3.5s infinite linear;
+    animation: enemymove 3.6s infinite linear;
       
 }
 @keyframes jump {
