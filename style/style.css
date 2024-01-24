@@ -31,25 +31,15 @@
 }
 .background {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 1300%;
+    height: 600;
     z-index: -10;
-    background: url('/images/background.png');
-    background-size:cover;
+    
     
     background-repeat: repeat-x;
     /* animation: cenario linear infinite 10s; */
 }
 
-/* .background2 {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -10;
-    background: url('/images/cenário.png') center/cover;
-    background-repeat: repeat-x;
-    animation: cenario2 linear infinite 50s;
-} */
 @keyframes cenario {
     from{
         left: 100%;
@@ -58,14 +48,7 @@
         left: -100%;
     }
 }
-@keyframes cenario2 {
-    from{
-        left: 200%;
-    }
-    to{
-        left: -100%;
-    }
-}
+
 @keyframes jump {
     0%{
         bottom: 0;
@@ -89,6 +72,6 @@
         left: 100%;
     }
     to{
-        left: 0%;
+        left: -10%;
     }
 }
