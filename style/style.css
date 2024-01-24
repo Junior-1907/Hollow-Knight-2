@@ -29,16 +29,17 @@
     animation: enemymove 3.5s infinite linear;
       
 }
-.background {
+
+/* #canvas {
     position: absolute;
-    width: 1300%;
-    height: 600;
-    z-index: -10;
-    
-    
-    background-repeat: repeat-x;
-    /* animation: cenario linear infinite 10s; */
+    width: 100%;
+    height: 100%;
 }
+#canvas img {
+    width: 100%;
+    height: 100%;
+} */
+
 
 @keyframes cenario {
     from{
