@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow: hidden;
+}
+#bg {
+    height: 100vh;
+    width: 100%;
+}
+.game-board {
+    border: 3px solid;
+    width: 1920px;
+    height: 800px;
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    transform: translate(-50%);
+    background-color: rgb(92, 92, 92);
+    overflow: hidden;
+}
+.knight {
+    position: absolute;
+    bottom: 0;
+    left: 300px;
+    width: 125px;
+}
+.isjumping{
+    animation: knight-jump 1.3s;
+}
+.enemy {
+    position: absolute;
+    bottom: 0;
+    animation: enemy-walk 3s linear;
+    left: 1920px;
+}
+
+@keyframes knight-jump {
+    0% {
+        bottom: 0;
+    }
+    50% {
+        bottom: 250px ;
+    }
+    85% {
+        bottom: 0;
+    }
+    100% {
+        bottom: 0;
+    }
+
+}
+@keyframes enemy-walk {
+    0% {
+        left: 1920px;
+    }
+    100% {
+        left:-100px;
+    }
+}
