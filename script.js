@@ -4,86 +4,90 @@ let knightPosX = parseInt(knight.offsetLeft);
 let knightPosY;
 let isJumping = false;
 document.addEventListener('keydown', (e) => {
-        if (e.code == 'Space' || e.code == 'KeyW' || e.code == 'ArrowUp') {
-                if (isJumping) {
-                        return;
-                }
-                else if (isJumping == false) {
-                        knight.classList.add('isjumping');
-                        isJumping = true;
-                        setTimeout(() => {
-                                knight.classList.remove('isjumping');
-                                isJumping = false;
-                        }, 1300);
-                } //else if (double jump == true) {}
+  if (e.code == 'Space' || e.code == 'KeyW' || e.code == 'ArrowUp') {
+    if (isJumping) {
+      return;
+    }
+    else if (isJumping == false) {
+      knight.classList.add('isjumping');
+      isJumping = true;
+      setTimeout(() => {
+        knight.classList.remove('isjumping');
+        isJumping = false;
+      }, 1300);
+    } //else if (double jump == true) {}
 
 
-        }
+  }
 })
 
 // Andar
 const keys = {
-        a: {
-                pressed:false,
-        },
-        d: {
-                pressed:false,
-        },
+  a: {
+    pressed: false,
+  },
+  d: {
+    pressed: false,
+  },
 }
 document.addEventListener('keydown', (event) => {
-        switch (event.key) {
-                case 'a':
-                        keys.a.pressed = true;
-                        break;
-                case 'd':
-                        keys.d.pressed = true;
-                        break;
-        }
+  switch (event.key) {
+    case 'a':
+      keys.a.pressed = true;
+      break;
+    case 'd':
+      keys.d.pressed = true;
+      break;
+  }
 })
 document.addEventListener('keyup', (event) => {
-        switch (event.key) {
-                case 'a':
-                        keys.a.pressed = false;
-                        break;
-                case 'd':
-                        keys.d.pressed = false;
-                        break;
-        }
+  switch (event.key) {
+    case 'a':
+      keys.a.pressed = false;
+      break;
+    case 'd':
+      keys.d.pressed = false;
+      break;
+  }
 });
 
-setInterval(()=>{     
-        if(keys.a.pressed == true){
-                knightPosX -= 2.5;
-                knight.style.left =`${knightPosX}px`
-        }
-        if(keys.d.pressed == true){
-                knightPosX += 2;
-                knight.style.left =`${knightPosX}px`
-        }
-        if(knightPosX <= 10){
-                knight.style.left = "10px";
-        }
-        if(knightPosX >= 1800){
-                knight.style.left = "1800px";
-        }
+setInterval(() => {
+  if (keys.a.pressed == true) {
+    knightPosX -= 2.5;
+    knight.style.left = `${knightPosX}px`
+  }
+  if (keys.d.pressed == true) {
+    knightPosX += 2;
+    knight.style.left = `${knightPosX}px`
+  }
+  if (knightPosX <= 10) {
+    knight.style.left = "10px";
+  }
+  if (knightPosX >= 1800) {
+    knight.style.left = "1800px";
+  }
 }, 2.5);
 
 
 // Morrer.
-const enemy = document.querySelector('.enemy');
+
 
 const KillLoop = setInterval(() => {
-        let enemyKill = enemy.offsetLeft;
-        knightPosY = window.getComputedStyle(knight).bottom.replace('px', '');
+  const enemy = document.querySelector('.enemy');
+  let enemyKill = enemy.offsetLeft;
+  console.log(enemyKill)
+  knightPosY = window.getComputedStyle(knight).bottom.replace('px', '');
+  
 
-        if (enemyKill <= knightPosX + 75 && enemyKill >= knightPosX - 75 && knightPosY < 140) {
-                knight.style.display = "none";
-                enemy.style.animation = "none";
-                enemy.style.left = `${enemyKill}px`;
-                console.log("GAME OVER");
-                
-                clearInterval(KillLoop);
-        }
+
+  if (enemyKill <= knightPosX + 75 && enemyKill >= knightPosX - 75 && knightPosY < 140) {
+    knight.style.display = "none";
+    enemy.style.animation = "none";
+    enemy.style.left = `${enemyKill}px`;
+    console.log("GAME OVER");
+
+    clearInterval(KillLoop);
+  }
 }, 50)
 
 //left: 375px
@@ -111,32 +115,32 @@ let x2 = 1920;
 let moveSpeed = 2;
 
 class Layer {
-        constructor(image, moveSpeed, y_position) {
-                this.x = 0;
-                this.y = y_position;
-                this.width = 1920;
-                this.height = 800;
-                this.x2 = this.width;
-                this.image = image;
-                this.speedModifier = moveSpeed;
-        }
-        draw() {
-                ctx.drawImage(this.image, this.x, this.y);
-                ctx.drawImage(this.image, this.x2, this.y);
-        }
-        update() {
-                if (this.x < -1920) {
-                        this.x = 1920 - this.speedModifier + this.x2;
-                } else {
-                        this.x -= this.speedModifier;
-                }
+  constructor(image, moveSpeed, y_position) {
+    this.x = 0;
+    this.y = y_position;
+    this.width = 1920;
+    this.height = 800;
+    this.x2 = this.width;
+    this.image = image;
+    this.speedModifier = moveSpeed;
+  }
+  draw() {
+    ctx.drawImage(this.image, this.x, this.y);
+    ctx.drawImage(this.image, this.x2, this.y);
+  }
+  update() {
+    if (this.x < -1920) {
+      this.x = 1920 - this.speedModifier + this.x2;
+    } else {
+      this.x -= this.speedModifier;
+    }
 
-                if (this.x2 < -1920) {
-                        this.x2 = 1920 - this.speedModifier + this.x;
-                } else {
-                        this.x2 -= this.speedModifier;
-                }
-        }
+    if (this.x2 < -1920) {
+      this.x2 = 1920 - this.speedModifier + this.x;
+    } else {
+      this.x2 -= this.speedModifier;
+    }
+  }
 }
 
 const a2Layer = new Layer(a2, 1, 0);
@@ -151,47 +155,59 @@ const a10Layer = new Layer(a10, 1, 0);
 const gameObjects = [a10Layer, a9Layer, a8Layer, a7Layer, a6Layer, a5Layer, a4Layer, a2Layer];
 
 function animation() {
-        ctx.clearRect(0, 0, canvaW, canvaH);
-        gameObjects.forEach(object => {
-                object.draw();
-                object.update();
-        })
+  ctx.clearRect(0, 0, canvaW, canvaH);
+  gameObjects.forEach(object => {
+    object.draw();
+    object.update();
+  })
 
-        requestAnimationFrame(animation);
+  requestAnimationFrame(animation);
 
-        setInterval(createMonster, 1000)
+  // setInterval(createMonster, 1000)
 
 }
 animation();
 
 // Inimigos Variados
 
- class enemyClass {
-         constructor(imagem,enemyVelocity,width){
-                 this.x = 1920;
-                 this.width = width;     
-                 this.image = imagem;
-                 this.class = "enemy";
-                 this.enemyVelocity =  enemyVelocity;
+class enemyClass {
+  constructor(imagem, enemyVelocity, width) {
+    this.x = 1920;
+    this.width = width;
+    this.image = imagem;
+    this.class = "enemy";
+    this.enemyVelocity = enemyVelocity;
+  }
+
+  spawn() {
+    const spawnPoint = document.createElement("img");
+    const divPai = document.getElementById("game-board");
+
+    spawnPoint.setAttribute('src', this.image);
+    spawnPoint.setAttribute('class', this.class);
+
+    divPai.appendChild(spawnPoint);
+  }
 }
-}
-const enemy0 = new enemyClass("./images/enemys/enemy0.gif", "100px" , -5);
+const enemy0 = new enemyClass("./images/enemys/enemy0.gif", -5, "100px");
 
-function createMonster(){
-        let enemyArray = [];
 
-        let spawnMonsterChance = Math.random();
+const enemy1 = new enemyClass("./images/enemys/enemy1.gif", -5, "100px");
 
-        if(spawnMonsterChance > 0.8){
-                
-                enemyArray.push()
-        }
-        else if(spawnMonsterChance > 0.6){
-                
-        }
-        else if(spawnMonsterChance > 0.5){
-                
-        }
+
+setInterval(createMonster, 2500)
+
+function createMonster() {
+  let enemyArray = [];
+
+  let spawnMonsterChance = Math.random();
+
+ if (spawnMonsterChance > 0.6) {
+    enemy0.spawn();
+  }
+  else if (spawnMonsterChance < 0.6) {
+    enemy1.spawn();
+  }
 }
 
 
